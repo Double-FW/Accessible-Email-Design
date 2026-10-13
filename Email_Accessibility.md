@@ -161,14 +161,14 @@ Text-only versions are typically delivered using multipart MIME, allowing users 
 
 ---
 
-## 12. Ragged-Left Text Alignment
+## 12. Ragged-Right Text Alignment
 
 ### Instruction  
-What is ragged-left text and why is it recommended?
+What is ragged-right text and why is it recommended?
 
 ### Explanation  
 
-Ragged-left text refers to text that is aligned to the left margin with uneven line endings on the right. This alignment improves readability by creating consistent starting points for each line, making it easier for users to track text visually.
+Ragged-right text refers to text that is aligned to the left margin with uneven line endings on the right. This alignment improves readability by creating consistent starting points for each line, making it easier for users to track text visually.
 
 Line lengths should ideally be kept between 50 and 70 characters to optimise readability and reduce cognitive effort.
 
