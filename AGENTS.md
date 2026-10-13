@@ -1,7 +1,7 @@
 ---
 title: "Agent instructions for accessible email generation"
 version: "1.0.0"
-author: "OpenAI ChatGPT, prepared for Gareth Ford Williams / Double FW Ltd"
+author: "Gareth Ford Williams and Double FW Ltd"
 date: "2026-10-13"
 license: "NOASSERTION"
 language: "en-GB"
