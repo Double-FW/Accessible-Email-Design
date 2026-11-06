@@ -1,308 +1,119 @@
----
-title: "Agent instructions for accessible email generation and validation"
-version: "1.1.0"
-author: "Repository maintainer"
-date: "2026-11-06"
-language: "en-GB"
-artifact_type: "agent_policy_and_validation_specification"
-source: "Email_Accessibility.md"
-policy_schema_version: "1.0"
-review_status: "adopted_for_repo_execution"
----
+# Agent instructions for accessible email work
 
-# AGENTS.md — Accessible Email Design
+## Purpose and scope
 
-## Purpose and authority
+Use this file when creating, reviewing, or revising accessible email content using this repository.
 
-This file governs any AI agent or automation system that generates, validates, repairs, or releases email content in this repository.
+The repository’s three reference documents have distinct roles:
 
-This repository is not a claim of universal accessibility conformance. It is a bounded operational policy for controlled validation and repair. The authoritative design requirements live in `Email_Accessibility.md`. This file operationalizes those requirements for automation only.
+- `Email_Accessibility.md` is the authoritative source for the email-design guidance.
+- `README.md` describes the repository and its intended use.
+- `LICENSE` contains the repository’s license terms.
 
-Rules:
-- Do not relax the source guidance.
-- Do not claim a full accessibility pass without evidence.
-- Do not dispatch or release email without separate authorisation.
-- When evidence is missing, ambiguous, or contradictory, return `hold` or `repair`, not `ready`.
-- A `ready` result means only: the configured checks passed in the current environment; it does not mean “full WCAG conformance” or “fully accessible in all clients”.
+This repository contains guidance, not an installed email validator or delivery system. Do not assume it provides a test command, automation framework, schema, client matrix, or permission to send email.
 
-## Scope
+## Core rules
 
-This repo is intended to support:
-- accessible email generation
-- HTML + plain-text parity checks
-- browser-based validation with Playwright and axe-core
-- repair workflows for broken or weak output
-- explicit decision states: `ready`, `repair`, `hold`
+1. Read `Email_Accessibility.md` before applying or describing its requirements.
+2. Preserve the message’s intended meaning, required facts, and actions. Do not invent facts, destinations, approvals, or evidence.
+3. Apply the source guide’s requirements without presenting recommendations or local choices as requirements from WCAG.
+4. Distinguish what you checked from what you could not establish. Do not claim that a message is fully accessible or WCAG-conformant based only on this guidance or automated checks.
+5. Do not send, schedule, or otherwise dispatch an email. A request to prepare or review content is not authorization to send it.
+6. If necessary information or evidence is missing, ask for it or report the limitation. Do not guess and report a pass.
 
-This repository must not implement unrestricted network access, live sending, or release autonomy.
+## Applying the source guide
 
-## Required repository conventions
+Use the following checklist when it applies to the message being created or reviewed:
 
-Use the following repository layout:
+- **Purpose and sequence:** Keep content in an order that makes sense visually and when read by assistive technology.
+- **Structure:** Use semantic headings to organize sections. Headings should express structure, not merely provide visual styling. Avoid inventing sections or headings when the message does not need them.
+- **Typography:** Follow the guide’s minimum text size of 14pt. Prefer clear, simple typefaces; avoid decorative or script fonts and excessive emphasis.
+- **Colour and contrast:** Use legible foreground and background combinations. Do not rely on colour alone to convey meaning. Preserve visible cues, such as underlines for links.
+- **Images:** Choose alternative text according to each image’s purpose. Use empty alternative text (`alt=""`) for decorative images. Do not claim an image description is meaningful merely because an `alt` attribute exists.
+- **Links:** Use descriptive link text that communicates purpose or destination. The source guide asks for links to make sense out of context; avoid vague labels such as “click here” or “read more.”
+- **Markup:** Prefer clear, appropriate HTML structure. Use tables only when suitable for tabular data or necessary for email layout, and preserve meaningful relationships.
+- **Responsive use:** Avoid layouts that make content difficult to read or use on small screens. Preserve content and actions when the layout changes.
+- **Text alternative:** When producing an HTML email, provide a plain-text alternative if requested or if the delivery context supports multipart alternatives. Keep essential information and actions consistent between representations.
+- **Alignment:** The guide’s explanation in sections 2 and 12 specifies left-aligned prose with uneven line endings on the right. Follow that stated behavior; do not interpret the section heading as an instruction to right-align text.
+- **Layout and content:** Prefer clear sections, consistent presentation, and concise wording. Do not remove information needed to understand or act on the message.
 
-```text
-.
-├── AGENTS.md
-├── Email_Accessibility.md
-├── README.md
-├── LICENSE
-├── package.json
-├── package-lock.json
-├── .gitignore
-├── .github/
-│   └── workflows/
-│       └── accessibility-validation.yml
-├── src/
-│   ├── cli.js
-│   └── validate.js
-├── schemas/
-│   ├── email-input.schema.json
-│   └── validation-report.schema.json
-├── fixtures/
-│   ├── pass.json
-│   ├── fail.json
-│   └── hold.json
-├── test/
-│   └── validate.test.js
-├── IMPLEMENTATION.md
-└── artifacts/   (generated, ignored)
-```
+These checks are a practical reading of the source guide. They do not establish that the message works in every email client or for every person.
 
-## Decision model
+## Workflow for creating or revising an email
 
-The agent must use exactly these states:
+### 1. Establish the request
 
-- `ready`: all applicable checks pass and the evidence is present
-- `repair`: a fixable issue was found and the required validation must rerun
-- `hold`: unresolved, missing evidence, blocked by policy, or not safe to release
+Identify, from the user’s instructions and supplied material:
 
-Rules:
-- `ready` is not a broad conformance claim.
-- `repair` is only valid when a concrete change can be made and retested.
-- `hold` is valid for missing evidence, invalid input, unsafe content, or policy violations.
-- Any `hold` or `repair` result must include a reason or evidence gap.
-- Release is never implicit. Dispatch requires separate authorisation.
+- the message’s purpose and intended audience
+- required facts, wording, and actions
+- the intended language
+- any supplied HTML, template, or plain-text content
+- constraints such as format, tone, or length
 
-## Required validation contract
+Use only facts and destinations supplied by the user or an explicitly identified trusted source. If an essential fact or destination is missing or contradictory, ask for clarification instead of filling the gap.
 
-The runner must support the following execution flow:
+### 2. Draft from meaning, not from assumptions
 
-1. Load JSON input from a file or stdin.
-2. Validate the structure against `schemas/email-input.schema.json`.
-3. Reject malformed or unsupported inputs with `hold` and exit non-zero.
-4. Run HTML rendering in a headless browser.
-5. Verify block ordering, document language, image alt presence, and link/action semantics.
-6. Run axe-core with a pinned version.
-7. Produce a report matching `schemas/validation-report.schema.json`.
-8. Return exit code:
-   - 0 for `ready`
-   - 1 for `hold`
-   - 2 for invalid input or runner error
+Organize the content before styling it. Preserve its essential facts and action sequence. Use a simple structure and readable wording. Do not add images, claims, links, or interactive elements unless they serve the stated purpose and have adequate source information.
 
-## Required output schema
+When producing both HTML and plain text, keep the same essential facts, sequence, and actions in both. Do not imply that MIME construction or delivery was tested unless it actually was.
 
-The validation result must look like this:
+### 3. Review the final content
 
-```json
-{
-  "schema_version": "1.0",
-  "message_id": "opaque-id",
-  "decision": "ready",
-  "release_authorized": false,
-  "scope": "Bounded validation-only result. This does not prove all-client accessibility.",
-  "checks": [
-    { "id": "S01-language", "outcome": "pass", "detail": "Document language matches the required profile." }
-  ],
-  "tool_versions": {
-    "node": "v22.x",
-    "playwright": "1.56.1",
-    "axe_core": "4.10.3"
-  },
-  "tested_at": "2026-11-06T12:00:00.000Z"
-}
-```
+Review the complete output, including headings, links, image alternatives, footers, and any supplied text alternative. Compare it with the user’s stated requirements and the checklist above.
 
-Rules:
-- `release_authorized` is always `false` in this repo unless a separate, explicit deployment step authorises dispatch.
-- `decision` must be one of: `ready`, `hold`
-- `checks` must contain machine-readable observations and must not hide failures
+If you can inspect HTML, you may check properties visible in the supplied markup, such as heading elements, link text, `alt` attributes, declared language, and inline styles. Such inspection does not prove how an email client will render the message or expose it to assistive technology.
 
-## Required input schema
+When you cannot inspect or verify a property, mark it as unverified. Do not infer success from the absence of an obvious problem.
 
-The input must be a JSON object with:
+### 4. Repair and re-review
 
-- `schema_version`: "1.0"
-- `message_id`: non-empty string
-- `profile`: "individual" or "organisation"
-- `language`: language code such as "en-GB"
-- `html`: non-empty HTML email string
-- `text`: plain-text alternative
-- `block_order`: ordered list of block IDs
-- `blocks`: array of objects with `id` and `kind`
-- `facts`: array of fact objects with `id`, `value`, and `source_ref`
-- `actions`: array of action objects with `id`, `label`, and valid `https`/`mailto`/`tel` URL
-- `semantic_evidence`: object with `status` and `provenance_ref`
+Make a specific repair when the issue and the correct change are clear. Preserve the message’s required meaning and facts. Re-review the revised output; do not describe an earlier version’s review as applying to changed content.
 
-The runner must reject any input that:
-- exceeds a reasonable size limit
-- provides unsupported URL schemes
-- has duplicate block IDs
-- mismatches `block_order` and rendered block IDs
-- omits required facts or actions
-- fails schema validation
+If a repair would require guessing at meaning, changing a required fact, or making an unsupported semantic judgement, ask for clarification or report that the issue remains unresolved.
 
-## Required checks
+## Review and evidence boundaries
 
-The minimal implementation must include these checks:
+This repository does not include an executable test harness. Unless the current environment separately provides and actually runs a relevant tool:
 
-- `S01-language`: HTML `lang` matches the input contract
-- `E03-dom-order`: rendered block IDs match the declared order
-- `E05a-min-font`: visible text is at least roughly 14pt
-- `E07a-image-alt`: every image has an explicit alt attribute
-- `E08a-link-name`: links have non-empty name-like content
-- `E08-action-contract`: action labels and URLs match the contract
-- `E11-fact-parity-html`: required facts appear in the HTML representation
-- `E11-fact-parity-text`: required facts appear in the plain-text representation
-- `S02-safe-subset`: no executable or unsafe embedded behaviors are present
-- `E10a-320px-overflow`: no horizontal overflow at 320 CSS px
-- `axe-violations`: axe-core results are evaluated and reported
-- `E07b-semantic-evidence`: provenance/ref status is present and called out as a limitation
+- Do not say that tests passed, that axe or another checker was run, or that browser/client testing occurred.
+- Do not invent test results, client coverage, measurements, or evidence references.
+- Do not treat a manual review as an automated test.
+- Do not treat an automated checker’s result as proof of image meaning, link purpose, factual accuracy, or overall accessibility.
+- Do not claim that browser rendering is equivalent to rendering in Gmail, Outlook, Apple Mail, or another email client.
+- Do not claim that a plain-text alternative has valid MIME structure unless the delivered MIME message was actually inspected.
 
-Important:
-- This is a bounded validation layer only.
-- It does not prove semantic image quality, business correctness of facts, full client compatibility, MIME fidelity beyond the provided text/HTML pair, or real-world email-client rendering.
+If the user requests tests or validation that the available environment cannot perform, say which checks were performed, which were not, and what tooling or evidence would be needed. A tool’s absence is not a pass.
 
-## Browser execution rules
+## Decision and response format
 
-Use Playwright with a headless Chromium instance.
+For a review, use one of these outcomes:
 
-Rules:
-- Do not allow network access for the test content.
-- Abort all requests during the render test.
-- Load HTML via `page.setContent()`.
-- Use DOM and computed-style checks.
-- Run axe-core with a pinned version.
-- Keep the result JSON machine-readable.
-- Never mutate the input in place while validating.
+- **Ready for the requested next step:** The requested content or review is complete within the stated scope. This is not a claim of full accessibility or authorization to send.
+- **Needs changes:** Identify specific issues that can be corrected without guessing.
+- **On hold:** Explain what missing information, evidence, or decision prevents a reliable result.
 
-## Repair policy
+Always state the scope. Separate findings from limitations. For example:
 
-If a check fails:
-- fix the issue if it is clearly within the repository's scope
-- rerun the full validation after the fix
-- ensure the previous evidence is invalidated by the change
-- keep a reason for the change in the repair result
+> **Outcome:** Needs changes  
+> **Scope:** Reviewed the supplied HTML and plain-text content against the repository guidance. No email-client or assistive-technology testing was performed.  
+> **Findings:** …  
+> **Not verified:** …
 
-The agent may produce a `repair` result only when:
-- the root cause is understood
-- the fix is bounded and specific
-- the fix can be retested
-- the output still matches the source facts and content contract
+Do not use “pass,” “certified,” “fully accessible,” or “WCAG-conformant” to describe an overall message based solely on a checklist or automated scan.
 
-If the issue is semantic, missing evidence, or not clearly fixable, use `hold`.
+## Changes to this repository
 
-## Release policy
+When asked to edit repository files:
 
-This repo must not release or dispatch email automatically.
+- Keep `Email_Accessibility.md` authoritative unless the user explicitly requests changes to it.
+- Do not weaken its guidance to accommodate a tool or template.
+- Keep claims in `README.md` consistent with files and functionality that actually exist.
+- Follow the terms in `LICENSE`; do not provide legal conclusions about them.
+- Do not add instructions referring to scripts, tests, schemas, workflows, or configuration unless those files are actually present or are being added in the same requested change.
+- If a requested implementation would need additional files or infrastructure, explain that requirement rather than claiming the repository already supports it.
 
-The agent must enforce:
-- `release_authorized: false` in all generated reports unless a separate caller explicitly authorises a send action
-- a separate validation step before dispatch
-- a digest/hash check before release if the system is extended
-- no silent downgrade from HTML+plain text to plain text only without explicit policy
-- no claim that this validation is equivalent to full legal or WCAG conformance
+## Final safeguard
 
-## CI and test requirements
-
-The repository must include:
-- `package.json` with pinned versions
-- `package-lock.json` committed and version-pinned
-- a GitHub Actions workflow for Node + Playwright
-- tests in `test/validate.test.js`
-- fixtures under `fixtures/`
-- a `schemas/` directory
-- a minimal `README` describing how to run validation
-
-Example CI workflow:
-```yaml
-name: Accessible email validation
-
-on:
-  push:
-  pull_request:
-
-jobs:
-  test:
-    runs-on: ubuntu-latest
-    timeout-minutes: 10
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '22'
-          cache: npm
-      - run: npm ci
-      - run: npx playwright install --with-deps chromium
-      - run: npm test
-```
-
-## Commands
-
-The repository must support these commands:
-
-```bash
-npm ci
-npm test
-npm run validate -- --input fixtures/pass.json
-npm run validate -- --input fixtures/fail.json
-npm run validate -- --input fixtures/hold.json
-npm run test:fixtures
-```
-
-Exit behavior:
-- pass fixture -> exit 0
-- fail fixture -> exit 1
-- hold fixture -> exit 1
-- malformed input -> exit 2
-
-## Required non-goals
-
-This repository is not:
-- a full email client testing matrix
-- a WWWCAG conformance engine
-- an email sending system
-- a business-signoff mechanism
-- a substitute for human accessibility judgement where evidence is not available
-
-## Agent operating instructions
-
-When working in this repository, the agent must:
-- inspect `Email_Accessibility.md` before making policy claims
-- use the source guide as the requirement source
-- prefer machine-checked evidence over model assumptions
-- produce `hold` whenever required evidence is absent
-- keep outputs deterministic and JSON-oriented
-- refuse to fabricate checks, rule IDs, or results
-- never claim dispatch authorization
-- never return a pass for any unverified semantic claim
-
-## Minimal implementation policy
-
-The agent should prefer a small, testable implementation over a broad theoretical design.
-
-Minimum viable implementation:
-- one CLI entry point
-- one validation runner
-- schema validation
-- Playwright HTML rendering test
-- axe-core integration
-- fixture-based tests
-- CI execution
-
-This is the minimum state that makes the repository “agent-executable” and reviewable.
-
-## Final rule
-
-If a requirement is not machine-checkable from the repository inputs, the correct outcome is `hold` or `repair`, not `ready`.
-
-This is the policy boundary. Everything else is a claim beyond the repository’s evidence.
+When you cannot establish that a requirement is met, report it as unverified or unresolved. Never turn uncertainty into a claim of accessibility, test success, or send authorization.
