@@ -1,26 +1,26 @@
 # Accessible Email Design: human-managed content creation and production activities and prompts
 
-**Prepared:** 8 November 2026 · **Source revision:** `9073de0460c4c078a4aa19a4a87c190243da984d`  
-**Source:** [Double-FW/Accessible-Email-Design](https://github.com/Double-FW/Accessible-Email-Design/tree/9073de0460c4c078a4aa19a4a87c190243da984d)  
+**Editorially updated:** 20 November 2026. Cite the actual checked-out or retrieved Git revision.
+**Source:** [maintained repository overview](../README.md). The RAG reference is navigation, not a duplicated historical corpus.
 **Audience:** authors, editors, designers, publishers, communication teams, producers, commissioners, access-service practitioners and technical/quality partners.
 
 ## Where the repository is useful
 
 Use this compact guide to plan, draft, inspect and revise emails and newsletters so that meaning, sequence and actions survive visual, nonvisual, mobile and plain-text reading. The current AGENTS file provides a useful prepare/review/repair workflow while explicitly distinguishing content inspection from actual client testing.
 
-The repository contains guidance, not an email validator, client test matrix or delivery system. Its 14pt minimum is a source-guide rule, not a universal WCAG threshold; any reconciliation with other profiles must be explicit. “Ragged-right” means left-aligned prose with uneven right edges in the guide’s Latin-script examples, not right-aligned text or a rule overriding other scripts. Preparation or review does not authorise sending or scheduling an email.
+The repository contains guidance, not an email validator, client test matrix or delivery system. Its 14pt starting baseline is local guidance, not a universal WCAG threshold; any reconciliation with other profiles must be explicit. “Ragged-right” means left-aligned prose with uneven right edges in the guide’s Latin-script examples, not right-aligned text or a rule overriding other scripts. Preparation or review does not authorise sending or scheduling an email.
 
 The activities below are an editorial application of the repository, not a claim that it already contains a complete organisational process. AI can organise material, draft options and scripts, identify inconsistencies and prepare specifications or evidence summaries. Authors and editors preserve factual meaning and editorial intent. Designers and technical practitioners implement and verify delivered formats. Qualified access-service specialists review their work, and affected audiences inform the experience. Accountable publishers/producers retain creative, acceptance, rights and release decisions. Assign these responsibilities to actual people locally; the examples do not establish a new team or approval body.
 
 ## How to use the prompts
 
-1. Attach [RAG_Reference.md](RAG_Reference.md). For selective retrieval, use the source routes below and [Source_Coverage.md](Source_Coverage.md).
+1. Read [RAG_Reference.md](RAG_Reference.md), then supply or retrieve its relevant owning documents. The index alone does not include them. See [Source_Coverage.md](Source_Coverage.md) for the route inventory.
 2. Replace bracketed inputs with the actual project brief, artefacts and evidence. Supply the target task, audience, platform/setting, constraints and intended decision. Treat missing information as unknown.
-3. Use either example prompt for the activity. Both refer to this folder’s reference. Supply only appropriate project information; use anonymised research findings where possible.
+3. Use either example prompt for the activity. Both use this folder’s index and the source files actually supplied or retrieved. Supply only appropriate project information; use anonymised research findings where possible.
 4. Require source ID, filename and original section citations; distinguish source guidance, local proposal, observed result and uncertainty. Ask for evidence requests where an artefact cannot be inspected.
 5. Review the result with the named human roles and record decisions. A prompt output is a draft editorial/production aid, not implementation or evidence that a test ran. Do not defer disabled people’s involvement until final testing.
 
-**Reusable response contract:** “Use the attached RAG_Reference.md as the knowledge source. Cite source IDs, files and sections. Distinguish source statements, project evidence, recommendations and unknowns. Preserve applicable source identifiers. Do not invent research, capability, approvals or test results. Give a concrete content/production artefact, trade-offs, evidence requests and decisions for the human team.”
+**Reusable response contract:** “Use RAG_Reference.md to locate the maintained owning source files and use only content actually supplied or retrieved. State missing inputs rather than guessing. Cite source IDs, files and sections. Distinguish source statements, project evidence, recommendations and unknowns. Preserve applicable source identifiers. Do not invent research, capability, approvals or test results. Give a concrete content/production artefact, trade-offs, evidence requests and decisions for the human team.”
 
 ## Activity map
 
@@ -55,7 +55,7 @@ The activities below are an editorial application of the repository, not a claim
 
 ### Example prompt 1
 
-> Use the attached RAG to brief [email or newsletter]. Identify audience, required facts, intended action, language, tone, template and constraints. List supplied destinations and missing information rather than inventing links. Produce a content plan and source-grounded accessibility considerations, without sending or scheduling anything.
+> Use the RAG index and retrieved owning sources to brief [email or newsletter]. Identify audience, required facts, intended action, language, tone, template and constraints. List supplied destinations and missing information rather than inventing links. Produce a content plan and source-grounded accessibility considerations, without sending or scheduling anything.
 
 ### Example prompt 2
 
@@ -133,7 +133,7 @@ The activities below are an editorial application of the repository, not a claim
 
 ### Example prompt 1
 
-> Using the RAG, review [email visual specification]. Apply the guide’s 14pt minimum as its own rule, not a WCAG universal minimum. Examine type, emphasis, contrast, link cues and left-aligned ragged-right Latin prose. Respect language/script context and mark unmeasured colour or rendering properties unverified.
+> Using the RAG, review [email visual specification]. Apply the guide’s local 14pt starting baseline, recording the adopted profile and any reasoned variation; do not call it a WCAG universal minimum. Examine type, emphasis, contrast, link cues and left-aligned ragged-right Latin prose. Respect language/script context and mark unmeasured colour or rendering properties unverified.
 
 ### Example prompt 2
 
@@ -237,7 +237,7 @@ The activities below are an editorial application of the repository, not a claim
 
 ### Example prompt 1
 
-> Use the RAG to review [final email content and available evidence]. Report each relevant check as observed, failed, unverified or inapplicable with reasons. Repair supported issues, preserve facts and re-review the revised draft. State which client, AT or delivery properties could not be tested; do not send or claim full accessibility.
+> Use the RAG to review [final email content and available evidence]. Report each relevant evaluation as verified, failed, unknown, not tested or not applicable with reasons. Keep observation/evidence types and unresolved decisions separate from those results. Repair supported issues, preserve facts and re-review the revised draft. State which client, AT or delivery properties could not be tested; do not send or claim full accessibility.
 
 ### Example prompt 2
 
