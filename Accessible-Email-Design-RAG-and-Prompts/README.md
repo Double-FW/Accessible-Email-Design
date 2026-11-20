@@ -1,5 +1,7 @@
-# Accessible Email Design — content creation and production resources
+# Email activities and retrieval navigation
 
-Start with [Content creation and production activities and prompts](Content_Creation_and_Production_Activities_and_Prompts.md) for 8 activities and 16 example prompts. Attach [RAG reference](RAG_Reference.md) when using a prompt. Consult [Source coverage](Source_Coverage.md) for the pinned revision, complete inventory, hashes and heading lookup. `Sources/` contains every original repository file with its directory structure and rights notices.
+Start with [eight activities and 16 illustrative prompts](Content_Creation_and_Production_Activities_and_Prompts.md). Use [RAG navigation](RAG_Reference.md) to retrieve relevant maintained source files and read [source coverage](Source_Coverage.md) for its boundaries.
 
-Snapshot: `9073de0460c4c078a4aa19a4a87c190243da984d` · Prepared 8 November 2026. This is a downloadable content-and-production resource pack; it does not change the GitHub repository or run the proposed evaluations.
+The index does not contain the owning source texts. Supply or retrieve the actual files alongside it; record the exact revision used. Do not assume an attached link was followed.
+
+Prompts support drafting and review; they do not run tests, establish approval or authorise sending. Original repository documentation is [MIT-licensed](../LICENSE); external works retain their own rights, as explained in [NOTICE.md](../NOTICE.md).
