@@ -1,0 +1,28 @@
+{
+  "source_repository": "Double-FW/Accessible-Email-Design",
+  "destination_dataset": "GarethFW/Accessible_Email_Design",
+  "source_files": [
+    "AGENTS.md",
+    "Accessible-Email-Design-RAG-and-Prompts/Content_Creation_and_Production_Activities_and_Prompts.md",
+    "Accessible-Email-Design-RAG-and-Prompts/RAG_Reference.md",
+    "Accessible-Email-Design-RAG-and-Prompts/README.md",
+    "Accessible-Email-Design-RAG-and-Prompts/Source_Coverage.md",
+    "Email_Accessibility.md",
+    "LICENSE",
+    "NOTICE.md",
+    "Production_Workflow_and_Handoff_Map.md",
+    "README.md",
+    "Related_Double_FW_Guidance.md",
+    "Terminology_Alignment.md"
+  ],
+  "document_files": [
+    "README.md",
+    "AGENTS.md",
+    "Email_Accessibility.md",
+    "Production_Workflow_and_Handoff_Map.md",
+    "Terminology_Alignment.md",
+    "Related_Double_FW_Guidance.md",
+    "NOTICE.md"
+  ],
+  "approved_license_sha256": "718328364da5d7ba8e2fe2b00e16126f46714ef2d2e9d16b04cf2706d48142f1"
+}

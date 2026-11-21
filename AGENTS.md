@@ -40,7 +40,7 @@ Apply this file when inspecting/editing this repository or drafting, reviewing a
 
 The email guide owns this repository's design guidance. It is practitioner guidance, not a universal technical standard or evidence that an organisation adopted it. README describes actual contents and limits; LICENSE and NOTICE define reuse/status boundaries. The RAG reference is navigation to maintained files, not an independent embedded corpus.
 
-This repository supplies no installed email validator, executable test harness, sending service, client matrix, schema enforcement or automatic release gate. Never infer installed capability, approval or delivery from a document describing a process. Repository agents apply the maintenance/source rules; locally deployed email agents need actual task authority and configured controls.
+This repository supplies no installed email-content validator, executable email-client test harness, sending service, client matrix, schema enforcement or automatic release gate. Never infer installed capability, approval or delivery from a document describing a process. Repository agents apply the maintenance/source rules; locally deployed email agents need actual task authority and configured controls.
 
 ## Authority and core rules
 
@@ -120,3 +120,7 @@ Use public dependencies for public training resources. If a source becomes unava
 Make authorised changes to owning documents, and align the relevant README, AGENTS, prompt and navigation references. Preserve the guide's useful intent while correcting ambiguities; do not silently weaken a source or promote a local choice into an external obligation. Use plain British English, semantic headings and descriptive links. Check local paths/fragments, metadata, consistent source/evidence states, public dependencies, licence declarations and source currency.
 
 Add implementation instructions only for files/tooling actually present or being added within the task. Keep test/audit reports out of the repository unless explicitly requested; summarise actual checks and limitations in the conversation. Update metadata when meaning changes without implying organisational approval. This file's adoption fields remain unassigned until an actual local decision exists.
+
+## Dataset publication maintenance
+
+The [weekly export](huggingface/SETUP.md) publishes explicitly selected committed guidance to one fixed dataset. Preserve all 16 learning sections, eight activities/16 illustrative prompts, complete owning documents, shared scope, authority, local design qualifications, source revisions/dates, MIT and third-party rights. The section stream is a derived retrieval view, not independent evidence or a set of measured outcomes. After changes, run export checks and regression tests. Keep HF_TOKEN confined to publishing, use GitHub’s built-in read-only token for public-source verification, and keep all test/audit report files out of both repositories. Diagnostics belong in workflow logs; provenance/schema are origin/format metadata. Distinguish installed tooling, configured credentials and actual successful publication. This exporter does not install an email sender or evaluate clients, delivery or models.
